@@ -89,6 +89,7 @@ Note the refresh token, vault id and vault key id. Each of these values will be 
 You can use the following command to run a `full` node on the Baseledger "peachtree" testnet:
 
 ```
+PROVIDE_REFRESH_TOKEN=<your access token> \
 VAULT_REFRESH_TOKEN=<your refresh token> \
 VAULT_ID=<vault id> \
 VAULT_KEY_ID=<vault key id> \
@@ -146,25 +147,25 @@ after the number of block confirmations. The number of L1 confirmations required
 Baseledger network recognizing any associated updates (e.g., changes to the validator set) is
 determined based on which EVM-based network is hosting the staking and token contracts:
 
-| Network | Block Confirmations |
-|--|--|
-| mainnet | 30 |
-| ropsten | 3 |
+| Network | Block Confirmations          |
+| ------- | ---------------------------- |
+| mainnet | 30                           |
+| ropsten | 3                            |
 | rinkeby | _not supported at this time_ |
-| kovan | _not supported at this time_ |
-| goerli | _not supported at this time_ |
+| kovan   | _not supported at this time_ |
+| goerli  | _not supported at this time_ |
 
 ## Staking Contract
 
 A [staking contract](https://github.com/Baseledger/baseledger-contracts/blob/master/contracts/Staking.sol), initialized with a reference to the UBT token contract address, is deployed on the following Ethereum networks:
 
-| Network | Symbol | Token Contract Address | Staking Contract Address |
-|--|--|--|--|
-| mainnet | UBT | `0x8400D94A5cb0fa0D041a3788e395285d61c9ee5e` | -- |
-| ropsten | UBTR | `0xa9a466b8f415bcc5883934eda70016f8b23ea776` | `0x0B5FC75192F8EE3B4795AB44b3B455aB3d97A6dF` |
-| rinkeby | -- | -- | -- |
-| kovan | -- | -- | -- |
-| goerli | -- | -- | -- |
+| Network | Symbol | Token Contract Address                       | Staking Contract Address                     |
+| ------- | ------ | -------------------------------------------- | -------------------------------------------- |
+| mainnet | UBT    | `0x8400D94A5cb0fa0D041a3788e395285d61c9ee5e` | --                                           |
+| ropsten | UBTR   | `0xa9a466b8f415bcc5883934eda70016f8b23ea776` | `0x0B5FC75192F8EE3B4795AB44b3B455aB3d97A6dF` |
+| rinkeby | --     | --                                           | --                                           |
+| kovan   | --     | --                                           | --                                           |
+| goerli  | --     | --                                           | --                                           |
 
 ### Faucet
 
@@ -209,7 +210,7 @@ way of governance approval or, in primitive/testnet setups, implicit approval.
 Staking contract source can be found [here](https://github.com/Baseledger/baseledger-contracts/blob/master/contracts/Staking.sol#L42).
 Example transaction on Ropsten can be found [here](https://ropsten.etherscan.io/tx/0x6f222afc6ee868f09c2738a13ef4508ba1022fd5f2f3d06c4dc63e5901fd4997).
 
-#### `withdraw(uint256 amount) external` 
+#### `withdraw(uint256 amount) external`
 
 Initiate the withdrawal of a portion, or all, of a previously deposited stake from the
 configured staking contract; the following example contract call to the staking contract on the "peachtree: testnet (`0x0B5FC75192F8EE3B4795AB44b3B455aB3d97A6dF`) results in 10,000 UBTR being withdrawn from our depositor account on the staking contract and returned.

@@ -56,12 +56,12 @@ func authorizeAccessToken(refreshToken string) (*ident.Token, error) {
 }
 
 func serviceFactory(cfg *common.Config, genesis *types.GenesisDoc) (*Service, error) {
-	if cfg.ProvideRefreshToken == nil {
-		common.Log.Debug("baseline protocol service implementation not configured; no bearer refresh token provided")
+	if cfg.ProvideAccessToken == nil {
+		common.Log.Debug("baseline protocol service implementation not configured; no Provide api access token provided")
 		return nil, nil
 	}
 
-	token, err := authorizeAccessToken(*cfg.ProvideRefreshToken)
+	token, err := authorizeAccessToken(*cfg.ProvideAccessToken)
 	if err != nil {
 		common.Log.Panicf("failed to initialize baseline protocol service implementation; bearer access token not authorized; %s", err.Error())
 	}

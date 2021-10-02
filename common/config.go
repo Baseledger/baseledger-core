@@ -59,7 +59,7 @@ type Config struct {
 	VaultKeyID        *uuid.UUID `json:"vault_key_id"`
 	VaultRefreshToken *string    `json:"-"`
 
-	ProvideRefreshToken    *string `json:"-"`
+	ProvideAccessToken    *string `json:"-"`
 	StakingContractAddress *string `json:"staking_contract_address"`
 	StakingNetwork         *string `json:"staking_network"`
 }
@@ -289,9 +289,9 @@ func ConfigFactory() (*Config, error) {
 	p2pPrivatePeerIDs := os.Getenv("BASELEDGER_PRIVATE_PEER_IDS")
 	p2pSeedPeers := os.Getenv("BASELEDGER_SEEDS")
 
-	var provideRefreshToken *string
-	if os.Getenv("PROVIDE_REFRESH_TOKEN") != "" {
-		provideRefreshToken = common.StringOrNil(os.Getenv("PROVIDE_REFRESH_TOKEN"))
+	var provideAccessToken *string
+	if os.Getenv("PROVIDE_ACCESS_TOKEN") != "" {
+		provideAccessToken = common.StringOrNil(os.Getenv("PROVIDE_ACCESS_TOKEN"))
 	}
 
 	var vaultRefreshToken string
@@ -394,7 +394,7 @@ func ConfigFactory() (*Config, error) {
 				LogFormat: logFormat,
 
 				// NodeKey json path
-				NodeKey: fmt.Sprintf("%s%snode.json", rootPath, string(os.PathSeparator)),
+				NodeKey: fmt.Sprintf("%s%sconfig.json", rootPath, string(os.PathSeparator)),
 
 				// Mechanism to connect to the ABCI application: socket | grpc
 				ABCI: abciConnectionType,
@@ -692,7 +692,7 @@ func ConfigFactory() (*Config, error) {
 		GenesisURL:      genesisURL,
 		GenesisStateURL: genesisStateURL,
 
-		ProvideRefreshToken:    provideRefreshToken,
+		ProvideAccessToken:    provideAccessToken,
 		StakingContractAddress: stakingContractAddress,
 		StakingNetwork:         common.StringOrNil(stakingNetwork),
 
